@@ -25,6 +25,7 @@ public class JPAMain {
 //        em.close();
 //        emf.close();
 
+        // 비영속
         Member member = new Member();
         member.setId(3L);
         member.setName("minseok3");
@@ -59,8 +60,10 @@ public class JPAMain {
         tx.begin();
 
         try{
+            // 영속 상태. DB 에 저장된 상태가 아님.
             JPAMain.em.persist(member);
-            tx.commit();
+//            em.detach(member); // 영속 상태 해제.
+            tx.commit(); // DB에 저장완료
         } catch (Exception e){
             tx.rollback();
         } finally {
