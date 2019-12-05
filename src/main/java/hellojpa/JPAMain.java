@@ -77,13 +77,24 @@ public class JPAMain {
 
         // flush
         tx.begin();
-        Member member4 = new Member();
+        Member member4 = new Member(191L, "qweqwe");
         em.persist(member4);
 
-        em.flush();
+//        em.flush();
 
         System.out.println("===========");
+        tx.rollback();
 
+        // 준영속상태
+        tx.begin();
+        em.detach(member3);
+        Member member5 = em.find(Member.class, 150L);
+
+        em.clear();
+        Member member6 = em.find(Member.class, 150L);
+
+        em.detach(member6);
+        Member member7 = em.find(Member.class, 150L);
         tx.commit();
 
         em.close();
