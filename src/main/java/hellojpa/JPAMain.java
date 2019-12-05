@@ -75,6 +75,17 @@ public class JPAMain {
         tx.commit();
 
 
+        // flush
+        tx.begin();
+        Member member4 = new Member();
+        em.persist(member4);
+
+        em.flush();
+
+        System.out.println("===========");
+
+        tx.commit();
+
         em.close();
         emf.close();
 
