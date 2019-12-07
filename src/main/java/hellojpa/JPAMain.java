@@ -51,10 +51,10 @@ public class JPAMain {
         System.out.println("========================================================");
 
 
-        tx.begin();
-        em.remove(em.find(Member.class, 150L));
-        em.remove(em.find(Member.class, 160L));
-        tx.commit();
+//        tx.begin();
+//        em.remove(em.find(Member.class, 150L));
+//        em.remove(em.find(Member.class, 160L));
+//        tx.commit();
 
 
         tx.begin();
