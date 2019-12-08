@@ -1,7 +1,6 @@
 package hellojpa;
 
 import javax.persistence.*;
-import java.lang.annotation.ElementType;
 import java.time.LocalDateTime;
 import java.util.Date;
 
