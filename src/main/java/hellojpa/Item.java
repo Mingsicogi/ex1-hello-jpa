@@ -9,6 +9,11 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
 
+/**
+ * item entity
+ *
+ * @author 전민석
+ */
 @Entity
 @Getter
 @Setter
