@@ -10,20 +10,6 @@ public class JPAMain {
     private static EntityManager em;
 
     public static void main(String[] args) {
-//        EntityManagerFactory emf = Persistence.createEntityManagerFactory("hello");
-//        EntityManager em = emf.createEntityManager();
-//        EntityTransaction tx = em.getTransaction();
-//
-//        tx.begin();
-//        Member member = new Member();
-//        member.setId(2L);
-//        member.setName("minseok2");
-//
-//        em.persist(member);
-//        tx.commit();
-//
-//        em.close();
-//        emf.close();
 
         // 비영속
         Member member = new Member();
@@ -38,6 +24,7 @@ public class JPAMain {
 
         Member dbInfo = em.find(Member.class, 3L);
         dbInfo.setName("minssogi2");
+        em.persist(dbInfo);
 
         tx.commit();
 
@@ -72,7 +59,12 @@ public class JPAMain {
         tx.begin();
         Member member3 = em.find(Member.class, 150L);
         member3.setName("ZZZZZZZZZZ");
+
+        // 불필요한 코드.
+//         em.persist(member3);
+        System.out.println("--- update ---");
         tx.commit();
+
 
 
         // flush
@@ -80,7 +72,7 @@ public class JPAMain {
         Member member4 = new Member(191L, "qweqwe");
         em.persist(member4);
 
-//        em.flush();
+        em.flush();
 
         System.out.println("===========");
         tx.rollback();
@@ -104,7 +96,7 @@ public class JPAMain {
     }
 
     // JPA 의 모든 데이터 변경은 트랜잭션 안에서 일어나야함.
-    public static void add(Member member){
+    private static void add(Member member){
         em = emf.createEntityManager();
         EntityTransaction tx = JPAMain.em.getTransaction();
         tx.begin();
@@ -115,11 +107,11 @@ public class JPAMain {
 //            em.detach(member); // 영속 상태 해제.
 
             // 1차 캐쉬 상태이기 때문에 DB select를 하지 않음.
-            Member dbInfo = em.find(Member.class, 3L);
+            Member dbInfo = em.find(Member.class, member.getId());
             System.out.println("name : " + dbInfo.getName());
-            Member member1 = em.find(Member.class, 3L);
+            Member member1 = em.find(Member.class, member.getId());
 
-            System.out.println("dbInfo == member1 : " + (dbInfo == member1));
+            System.out.println("[dbInfo == member1] result : " + (dbInfo == member1));
 
 
             tx.commit(); // DB에 저장완료
