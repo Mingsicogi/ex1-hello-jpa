@@ -5,11 +5,23 @@ import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
-//@Table(uniqueConstraints = "") // 한컬럼에 유니크 제약죠건을 사용할 수 있
+//@Table(uniqueConstraints = "") // 한컬럼에 유니크 제약조건을 사용할 수 있다.
+//@SequenceGenerator(
+//        name = "MEMBER_SEQ_GEN",
+//        sequenceName = "MEM_SEQ",
+//        initialValue = 1, allocationSize = 1
+//)
+//@TableGenerator(
+//        name = "MEMBER_SEQ_GEN",
+//        table = "MY_SEQ",
+//        pkColumnName = "MEM_SEQ", allocationSize = 1
+//)
 public class Member {
 
     @Id
-    private long id;
+    @GeneratedValue
+//    @GeneratedValue(strategy = GenerationType.TABLE, generator = "MEMBER_SEQ_GEN")
+    private Long id;
 
     @Column(name = "name", updatable = false, nullable = false) // 수정을 할 수 있는 필드 인지 아닌지, notnull == nullable = false
     private String name;
